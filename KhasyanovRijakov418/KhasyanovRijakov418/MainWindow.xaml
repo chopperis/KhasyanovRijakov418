@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Кнопка" HorizontalAlignment="Left" Margin="261,100,0,0" VerticalAlignment="Top" Width="254" Height="179"/>
+        <Button Content="ЭРИК ПОПКА" HorizontalAlignment="Left" Margin="261,100,0,0" VerticalAlignment="Top" Width="254" Height="179"/>
 
     </Grid>
 </Window>
