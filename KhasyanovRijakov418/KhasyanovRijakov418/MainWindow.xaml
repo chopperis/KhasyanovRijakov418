@@ -18,6 +18,7 @@
         <Rectangle Fill="#FFF4F4F5" Grid.Row="2" StrokeThickness="0"/>
         <Button Content="Назад" HorizontalAlignment="Left" Margin="26,10,0,0" VerticalAlignment="Top" Width="108" Height="43"/>
         <Frame x:Name="MainFrame" Content="Frame" HorizontalAlignment="Left" Height="294" Grid.Row="1" VerticalAlignment="Bottom" Width="792"/>
+        <Label Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="11.321,7.688" Margin="326,41,0,0" Grid.Row="1" Height="62" Width="110"/>
 
     </Grid>
 </Window>
