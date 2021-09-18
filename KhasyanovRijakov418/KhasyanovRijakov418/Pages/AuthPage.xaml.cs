@@ -24,5 +24,16 @@ namespace KhasyanovRijakov418.Pages
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(login.Text) || string.IsNullOrEmpty(password.Text)) {
+                MessageBox.Show("Введите логин и пароль!");
+                return;
+            }
+        }
+ 
+  
     }
+    
 }
