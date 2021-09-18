@@ -78,6 +78,9 @@
     <Compile Include="Pages\AuthPage.xaml.cs">
       <DependentUpon>AuthPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\CustomerMenu.xaml.cs">
+      <DependentUpon>CustomerMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Page2.xaml.cs">
       <DependentUpon>Page2.xaml</DependentUpon>
     </Compile>
@@ -113,6 +116,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\AuthPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CustomerMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
