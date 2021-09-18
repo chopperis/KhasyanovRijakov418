@@ -16,8 +16,8 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Rectangle Fill="#FFF4F4F5" Grid.Row="2" StrokeThickness="0"/>
-        <Button Content="Назад" HorizontalAlignment="Left" Margin="26,10,0,0" VerticalAlignment="Top" Width="108" Height="43"/>
-        <Frame x:Name="MainFrame" Source="Pages/AuthPage.xaml" Grid.Row="1"/>
+        <Button x:Name="ButtonBack" Content="Назад" HorizontalAlignment="Left" Margin="26,10,0,0" VerticalAlignment="Top" Width="108" Height="43" Click="ButtonBack_Click"/>
+        <Frame x:Name="MainFrame" Source="Pages/AuthPage.xaml" Grid.Row="1" Navigated="MainFrame_OnNavigated"/>
 
     </Grid>
 </Window>
