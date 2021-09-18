@@ -1,0 +1,478 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище HD_RDModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="LastName" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Address" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="BankDetails" Type="bigint" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "318_HD_RD.dbo.ListEntry" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="ListEntry">
+          <Key>
+            <PropertyRef Name="QuantityProduct" />
+            <PropertyRef Name="PriceProduct" />
+          </Key>
+          <Property Name="QuantityProduct" Type="int" Nullable="false" />
+          <Property Name="PriceProduct" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="Waybill_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="ProductName" Type="nchar" MaxLength="60" Nullable="false" />
+          <Property Name="UnitDimension" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "318_HD_RD.dbo.Product_in_Storage" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Product_in_Storage">
+          <Key>
+            <PropertyRef Name="QuantityProduct_in_Storage" />
+          </Key>
+          <Property Name="QuantityProduct_in_Storage" Type="int" Nullable="false" />
+          <Property Name="StorageID" Type="int" />
+          <Property Name="ProductID" Type="int" />
+        </EntityType>
+        <EntityType Name="Storages">
+          <Key>
+            <PropertyRef Name="StorageID" />
+          </Key>
+          <Property Name="StorageID" Type="int" Nullable="false" />
+          <Property Name="NameStorage" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Login" Type="nchar" MaxLength="20" />
+          <Property Name="Password" Type="nchar" MaxLength="20" />
+          <Property Name="Role" Type="nchar" MaxLength="25" />
+          <Property Name="FIO" Type="nchar" MaxLength="50" />
+          <Property Name="ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Waybill">
+          <Key>
+            <PropertyRef Name="Waybill_ID" />
+          </Key>
+          <Property Name="Waybill_ID" Type="int" Nullable="false" />
+          <Property Name="Date_Waybill" Type="date" Nullable="false" />
+          <Property Name="Price_Waybill" Type="float" Nullable="false" />
+          <Property Name="CustomerID" Type="int" />
+          <Property Name="StorageID" Type="int" />
+        </EntityType>
+        <Association Name="FK_ListEntry_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ListEntry" Type="Self.ListEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ListEntry">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListEntry_Waybill">
+          <End Role="Waybill" Type="Self.Waybill" Multiplicity="0..1" />
+          <End Role="ListEntry" Type="Self.ListEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Waybill">
+              <PropertyRef Name="Waybill_ID" />
+            </Principal>
+            <Dependent Role="ListEntry">
+              <PropertyRef Name="Waybill_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_in_Storage_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Product_in_Storage" Type="Self.Product_in_Storage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Product_in_Storage">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_in_Storage_Storages">
+          <End Role="Storages" Type="Self.Storages" Multiplicity="0..1" />
+          <End Role="Product_in_Storage" Type="Self.Product_in_Storage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Storages">
+              <PropertyRef Name="StorageID" />
+            </Principal>
+            <Dependent Role="Product_in_Storage">
+              <PropertyRef Name="StorageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Waybill_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="Waybill" Type="Self.Waybill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Waybill">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Waybill_Storages">
+          <End Role="Storages" Type="Self.Storages" Multiplicity="0..1" />
+          <End Role="Waybill" Type="Self.Waybill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Storages">
+              <PropertyRef Name="StorageID" />
+            </Principal>
+            <Dependent Role="Waybill">
+              <PropertyRef Name="StorageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище HD_RDModelContainer">
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Storages" EntityType="Self.Storages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Waybill" EntityType="Self.Waybill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListEntry" EntityType="Self.ListEntry" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ListEntry].[QuantityProduct] AS [QuantityProduct], 
+    [ListEntry].[PriceProduct] AS [PriceProduct], 
+    [ListEntry].[ProductID] AS [ProductID], 
+    [ListEntry].[Waybill_ID] AS [Waybill_ID]
+    FROM [dbo].[ListEntry] AS [ListEntry]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Product_in_Storage" EntityType="Self.Product_in_Storage" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Product_in_Storage].[QuantityProduct_in_Storage] AS [QuantityProduct_in_Storage], 
+    [Product_in_Storage].[StorageID] AS [StorageID], 
+    [Product_in_Storage].[ProductID] AS [ProductID]
+    FROM [dbo].[Product_in_Storage] AS [Product_in_Storage]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_ListEntry_Product" Association="Self.FK_ListEntry_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ListEntry" EntitySet="ListEntry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListEntry_Waybill" Association="Self.FK_ListEntry_Waybill">
+            <End Role="Waybill" EntitySet="Waybill" />
+            <End Role="ListEntry" EntitySet="ListEntry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_in_Storage_Product" Association="Self.FK_Product_in_Storage_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Product_in_Storage" EntitySet="Product_in_Storage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_in_Storage_Storages" Association="Self.FK_Product_in_Storage_Storages">
+            <End Role="Storages" EntitySet="Storages" />
+            <End Role="Product_in_Storage" EntitySet="Product_in_Storage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Waybill_Customers" Association="Self.FK_Waybill_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Waybill" EntitySet="Waybill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Waybill_Storages" Association="Self.FK_Waybill_Storages">
+            <End Role="Storages" EntitySet="Storages" />
+            <End Role="Waybill" EntitySet="Waybill" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HD_RDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="BankDetails" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Waybill" Relationship="Self.FK_Waybill_Customers" FromRole="Customers" ToRole="Waybill" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="ProductName" Type="String" MaxLength="60" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="UnitDimension" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ListEntry" Relationship="Self.FK_ListEntry_Product" FromRole="Product" ToRole="ListEntry" />
+          <NavigationProperty Name="Product_in_Storage" Relationship="Self.FK_Product_in_Storage_Product" FromRole="Product" ToRole="Product_in_Storage" />
+        </EntityType>
+        <EntityType Name="Storages">
+          <Key>
+            <PropertyRef Name="StorageID" />
+          </Key>
+          <Property Name="StorageID" Type="Int32" Nullable="false" />
+          <Property Name="NameStorage" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Product_in_Storage" Relationship="Self.FK_Product_in_Storage_Storages" FromRole="Storages" ToRole="Product_in_Storage" />
+          <NavigationProperty Name="Waybill" Relationship="Self.FK_Waybill_Storages" FromRole="Storages" ToRole="Waybill" />
+        </EntityType>
+        <EntityType Name="Waybill">
+          <Key>
+            <PropertyRef Name="Waybill_ID" />
+          </Key>
+          <Property Name="Waybill_ID" Type="Int32" Nullable="false" />
+          <Property Name="Date_Waybill" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Price_Waybill" Type="Double" Nullable="false" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="StorageID" Type="Int32" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Waybill_Customers" FromRole="Waybill" ToRole="Customers" />
+          <NavigationProperty Name="Storages" Relationship="Self.FK_Waybill_Storages" FromRole="Waybill" ToRole="Storages" />
+          <NavigationProperty Name="ListEntry" Relationship="Self.FK_ListEntry_Waybill" FromRole="Waybill" ToRole="ListEntry" />
+        </EntityType>
+        <EntityType Name="ListEntry">
+          <Key>
+            <PropertyRef Name="QuantityProduct" />
+            <PropertyRef Name="PriceProduct" />
+          </Key>
+          <Property Name="QuantityProduct" Type="Int32" Nullable="false" />
+          <Property Name="PriceProduct" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="Waybill_ID" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ListEntry_Product" FromRole="ListEntry" ToRole="Product" />
+          <NavigationProperty Name="Waybill" Relationship="Self.FK_ListEntry_Waybill" FromRole="ListEntry" ToRole="Waybill" />
+        </EntityType>
+        <EntityType Name="Product_in_Storage">
+          <Key>
+            <PropertyRef Name="QuantityProduct_in_Storage" />
+          </Key>
+          <Property Name="QuantityProduct_in_Storage" Type="Int32" Nullable="false" />
+          <Property Name="StorageID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_in_Storage_Product" FromRole="Product_in_Storage" ToRole="Product" />
+          <NavigationProperty Name="Storages" Relationship="Self.FK_Product_in_Storage_Storages" FromRole="Product_in_Storage" ToRole="Storages" />
+        </EntityType>
+        <Association Name="FK_Waybill_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="Waybill" Type="Self.Waybill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Waybill">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListEntry_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ListEntry" Type="Self.ListEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ListEntry">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_in_Storage_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Product_in_Storage" Type="Self.Product_in_Storage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Product_in_Storage">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_in_Storage_Storages">
+          <End Role="Storages" Type="Self.Storages" Multiplicity="0..1" />
+          <End Role="Product_in_Storage" Type="Self.Product_in_Storage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Storages">
+              <PropertyRef Name="StorageID" />
+            </Principal>
+            <Dependent Role="Product_in_Storage">
+              <PropertyRef Name="StorageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Waybill_Storages">
+          <End Role="Storages" Type="Self.Storages" Multiplicity="0..1" />
+          <End Role="Waybill" Type="Self.Waybill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Storages">
+              <PropertyRef Name="StorageID" />
+            </Principal>
+            <Dependent Role="Waybill">
+              <PropertyRef Name="StorageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListEntry_Waybill">
+          <End Role="Waybill" Type="Self.Waybill" Multiplicity="0..1" />
+          <End Role="ListEntry" Type="Self.ListEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Waybill">
+              <PropertyRef Name="Waybill_ID" />
+            </Principal>
+            <Dependent Role="ListEntry">
+              <PropertyRef Name="Waybill_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Self.Customers" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="Storages" EntityType="Self.Storages" />
+          <EntitySet Name="Waybill" EntityType="Self.Waybill" />
+          <EntitySet Name="ListEntry" EntityType="Self.ListEntry" />
+          <EntitySet Name="Product_in_Storage" EntityType="Self.Product_in_Storage" />
+          <AssociationSet Name="FK_Waybill_Customers" Association="Self.FK_Waybill_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Waybill" EntitySet="Waybill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListEntry_Product" Association="Self.FK_ListEntry_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ListEntry" EntitySet="ListEntry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_in_Storage_Product" Association="Self.FK_Product_in_Storage_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Product_in_Storage" EntitySet="Product_in_Storage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_in_Storage_Storages" Association="Self.FK_Product_in_Storage_Storages">
+            <End Role="Storages" EntitySet="Storages" />
+            <End Role="Product_in_Storage" EntitySet="Product_in_Storage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Waybill_Storages" Association="Self.FK_Waybill_Storages">
+            <End Role="Storages" EntitySet="Storages" />
+            <End Role="Waybill" EntitySet="Waybill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListEntry_Waybill" Association="Self.FK_ListEntry_Waybill">
+            <End Role="Waybill" EntitySet="Waybill" />
+            <End Role="ListEntry" EntitySet="ListEntry" />
+          </AssociationSet>
+          <EntitySet Name="Users" EntityType="HD_RDModel.Users" />
+        </EntityContainer>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Login" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="FIO" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище HD_RDModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="HD_RDModel.Customers">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="BankDetails" ColumnName="BankDetails" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="HD_RDModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="UnitDimension" ColumnName="UnitDimension" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Storages">
+            <EntityTypeMapping TypeName="HD_RDModel.Storages">
+              <MappingFragment StoreEntitySet="Storages">
+                <ScalarProperty Name="StorageID" ColumnName="StorageID" />
+                <ScalarProperty Name="NameStorage" ColumnName="NameStorage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Waybill">
+            <EntityTypeMapping TypeName="HD_RDModel.Waybill">
+              <MappingFragment StoreEntitySet="Waybill">
+                <ScalarProperty Name="Waybill_ID" ColumnName="Waybill_ID" />
+                <ScalarProperty Name="Date_Waybill" ColumnName="Date_Waybill" />
+                <ScalarProperty Name="Price_Waybill" ColumnName="Price_Waybill" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="StorageID" ColumnName="StorageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListEntry">
+            <EntityTypeMapping TypeName="HD_RDModel.ListEntry">
+              <MappingFragment StoreEntitySet="ListEntry">
+                <ScalarProperty Name="QuantityProduct" ColumnName="QuantityProduct" />
+                <ScalarProperty Name="PriceProduct" ColumnName="PriceProduct" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Waybill_ID" ColumnName="Waybill_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_in_Storage">
+            <EntityTypeMapping TypeName="HD_RDModel.Product_in_Storage">
+              <MappingFragment StoreEntitySet="Product_in_Storage">
+                <ScalarProperty Name="QuantityProduct_in_Storage" ColumnName="QuantityProduct_in_Storage" />
+                <ScalarProperty Name="StorageID" ColumnName="StorageID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="HD_RDModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
