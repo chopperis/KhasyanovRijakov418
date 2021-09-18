@@ -31,9 +31,29 @@ namespace KhasyanovRijakov418.Pages
                 MessageBox.Show("Введите логин и пароль!");
                 return;
             }
+
+            using (var db = new Entities())
+            {
+                var user = db.Users
+                    .AsNoTracking()
+                    .FirstOrDefault(u => u.Login == login.Text && u.Password == password.Text);
+
+                if (user == null) {
+                    MessageBox.Show("Пользователь с такими данными не найден!");
+                    return;
+                }
+
+                MessageBox.Show("Пользователь успешно найден!");
+
+                switch (user.Role) {
+                    case "Заказчик":
+                        NavigationService?.Navigate(new Menu());
+                        break;
+                    case "Директор":
+                        NavigationService?.Navigate(new Menu());
+                        break;
+                }
+            }
         }
- 
-  
     }
-    
 }
