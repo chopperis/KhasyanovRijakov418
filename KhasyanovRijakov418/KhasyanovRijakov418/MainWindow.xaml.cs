@@ -41,6 +41,16 @@ namespace KhasyanovRijakov418
             {
                 ButtonBack.Visibility = Visibility.Visible;
             }
+
+            if (!(e.Content is Page Calc)) return;
+            if (Calc is calc)
+            {
+                ButtonCalc.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                ButtonCalc.Visibility = Visibility.Visible;
+            }
         }
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e)
@@ -51,7 +61,6 @@ namespace KhasyanovRijakov418
         private void button_calc(object sender, RoutedEventArgs e)
         {
             MainFrame.Content = new calc();
-
         }
     }
 }

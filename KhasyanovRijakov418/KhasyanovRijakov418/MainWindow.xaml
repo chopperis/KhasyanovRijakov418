@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:KhasyanovRijakov418"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid Height="419" VerticalAlignment="Bottom">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
             <RowDefinition Height="235*"/>
@@ -16,9 +16,9 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Rectangle Fill="#FFF4F4F5" Grid.Row="2" StrokeThickness="0"/>
-        <Button x:Name="ButtonBack" Content="Назад" HorizontalAlignment="Left" Margin="26,10,0,0" VerticalAlignment="Top" Width="108" Height="43" Click="ButtonBack_Click"/>
+        <Button x:Name="ButtonBack" Content="Назад" Margin="26,10,658,10" Click="ButtonBack_Click"/>
         <Frame x:Name="MainFrame" Source="Pages/AuthPage.xaml" Grid.Row="1" Navigated="MainFrame_OnNavigated"/>
-        <Button x:Name="ButtonBack_Copy" Content="Калькулятор" HorizontalAlignment="Left" Margin="659,10,0,0" VerticalAlignment="Top" Width="108" Height="43" Click="button_calc"/>
+        <Button x:Name="ButtonCalc" Content="Калькулятор" Margin="659,10,25,10" Click="button_calc"/>
 
     </Grid>
 </Window>
