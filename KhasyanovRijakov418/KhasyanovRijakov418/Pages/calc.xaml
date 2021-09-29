@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:KhasyanovRijakov418.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="calc">
+      Title="Калькулятор">
 
     <Grid>
         <Grid x:Name="LayoutRoot">

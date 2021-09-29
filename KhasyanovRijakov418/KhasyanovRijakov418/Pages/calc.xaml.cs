@@ -39,6 +39,19 @@ namespace KhasyanovRijakov418.Pages
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string s = (string)((Button)e.OriginalSource).Content;
+            if (s == "x^2") {
+                string b = s;
+                char[] MyChar = { 'x' };
+                string NewString = b.TrimStart(MyChar);
+                s = NewString;
+            }
+            else if (s == "√x" || s == "1/x" || s == "10^x")
+            {
+                string b = s;
+                char[] MyChar = { 'x' };
+                string NewString = b.TrimEnd(MyChar);
+                s = NewString;
+            }
             textBlock.Text += s;
             int num;
             bool result = Int32.TryParse(s, out num);
@@ -83,8 +96,16 @@ namespace KhasyanovRijakov418.Pages
         }
         private void Update_RightOp()
         {
-            int num1 = Int32.Parse(leftop);
-            int num2 = Int32.Parse(rightop);
+            double num1 = 0;
+            if (leftop != "")
+            {
+                num1 = Int32.Parse(leftop);
+            }
+            double num2 = 0;
+            if (rightop != "") {
+                num2 = Int32.Parse(rightop);
+            }
+
             switch (operation)
             {
                 case "+":
@@ -99,8 +120,20 @@ namespace KhasyanovRijakov418.Pages
                 case "/":
                     rightop = (num1 / num2).ToString();
                     break;
-                case "x^2":
-                    rightop = (num1 * num1).ToString();
+                case "^2":
+                    rightop = Math.Pow(num1, 2).ToString();
+                    break;
+                case "√":
+                    rightop = Math.Sqrt(num2).ToString();
+                    break;
+                case "1/":
+                    if (num2 != 0)
+                        rightop = Math.Round(1 / num2, 2).ToString();
+                    else
+                        rightop = "На ноль делить нельзя!!!";
+                    break;
+                case "10^":
+                    rightop = Math.Pow(10, num2).ToString();
                     break;
             }
         }
