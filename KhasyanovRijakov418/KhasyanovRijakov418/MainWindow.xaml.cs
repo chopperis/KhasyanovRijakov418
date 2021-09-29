@@ -47,5 +47,11 @@ namespace KhasyanovRijakov418
         {
             if (MainFrame.CanGoBack) MainFrame.GoBack();
         }
+
+        private void button_calc(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new calc();
+
+        }
     }
 }
