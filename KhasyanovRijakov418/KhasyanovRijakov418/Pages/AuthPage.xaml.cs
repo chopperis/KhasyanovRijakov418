@@ -60,7 +60,7 @@ namespace KhasyanovRijakov418.Pages
 
         private void ButtonRegistration_OnClick(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new Page2());
+            NavigationService?.Navigate(new RegPage());
         }
     }
 }

@@ -1,0 +1,42 @@
+﻿<Page x:Class="KhasyanovRijakov418.Pages.RegPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:KhasyanovRijakov418.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RegPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="login" TextWrapping="Wrap" Grid.Column="2" Height="28" VerticalAlignment="Top" Grid.Row="1"/>
+        <PasswordBox x:Name="password" PasswordChar="*" Grid.Column="2" Height="28" VerticalAlignment="Top" Grid.Row="1" Margin="0,33,0,0"/>
+        <PasswordBox x:Name="password_copy" PasswordChar="*" Grid.Column="2" Height="28" VerticalAlignment="Top" Grid.Row="1" Margin="0,66,0,0"/>
+        <TextBox x:Name="fio" TextWrapping="Wrap" Grid.Column="2" Height="28" VerticalAlignment="Top" Grid.Row="1" Margin="0,132,0,0"/>
+        <Label Content="Введите логин" Grid.Column="1" Height="28" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label Content="Введите пароль" Grid.Column="1" Height="28" VerticalAlignment="Top" Grid.Row="1" Margin="0,33,0,0"/>
+        <Label Content="Подтвердите пароль" Height="28" VerticalAlignment="Top" Grid.Row="1" Margin="0,66,0,0" Grid.Column="1"/>
+        <Label Content="Введите ФИО" Grid.Column="1" Height="28" VerticalAlignment="Top" Grid.Row="1" Margin="0,132,0,0"/>
+        <Label Content="Выберите роль" Grid.Column="1" Height="28" VerticalAlignment="Top" Grid.Row="1" Margin="0,99,0,0"/>
+        <Button Content="Регистрация"  Grid.Column="2" Margin="50,165,50,0" Grid.Row="1" VerticalAlignment="Top" Height="28" Click="Button_Click_Reg"/>
+        <Button Content="Отмена"  Grid.Column="1" Margin="50,165 ,50,0" Grid.Row="1" VerticalAlignment="Top" Height="28" Click="Button_Click"/>
+        <ComboBox x:Name="role" Grid.Column="2" Margin="0,99,0,0" Grid.Row="1" VerticalAlignment="Top" Height="28">
+            <ComboBoxItem IsSelected="True">
+                <TextBlock>Director</TextBlock>
+            </ComboBoxItem>
+            <TextBlock>Customer</TextBlock>
+        </ComboBox>
+
+    </Grid>
+</Page>
