@@ -13,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
+using System.Diagnostics;
+using Microsoft.Win32;
 
 namespace KhasyanovRijakov418
 {
@@ -25,8 +28,6 @@ namespace KhasyanovRijakov418
         {
             InitializeComponent();
         }
-
-
 
         private void MainFrame_OnNavigated(object sender, NavigationEventArgs e)
         {
@@ -61,6 +62,26 @@ namespace KhasyanovRijakov418
         private void button_calc(object sender, RoutedEventArgs e)
         {
             MainFrame.Content = new calc();
+        }
+
+        private void Export(object sender, RoutedEventArgs e)
+        {
+            string path = "export.txt";
+            StreamWriter sw = new StreamWriter(path);
+
+            using (var db = new Entities())
+            {
+                string IDline = String.Join(
+                    ":", db.Users.Select(x => x.Login),
+                    ":", db.Users.Select(x => x.Password),
+                    ":", db.Users.Select(x => x.Role),
+                    ":", db.Users.Select(x => x.FIO),
+                    ":", db.Users.Select(x => x.ID));
+                sw.WriteLine(IDline);
+                sw.Close();
+
+                Process.Start("notepad.exe", path);
+            }
         }
     }
 }
