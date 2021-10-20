@@ -19,7 +19,8 @@
         <Button x:Name="ButtonBack" Content="Назад" Margin="26,10,658,10" Click="ButtonBack_Click"/>
         <Frame x:Name="MainFrame" Source="Pages/AuthPage.xaml" Grid.Row="1" Navigated="MainFrame_OnNavigated"/>
         <Button x:Name="ButtonCalc" Content="Калькулятор" Margin="659,10,25,10" Click="button_calc"/>
-        <Button x:Name="ButtonExport" Content="Экспорт" Margin="342,10,342,10" Click="Export"/>
+        <Button x:Name="ButtonExport" Content="Экспорт" Margin="284,10,400,10" Click="Export"/>
+        <Button x:Name="ButtonExport_Copy" Content="Импорт" Margin="397,10,287,10" Click="Import"/>
 
     </Grid>
 </Window>
