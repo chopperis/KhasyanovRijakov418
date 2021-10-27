@@ -15,6 +15,7 @@ namespace KhasyanovRijakov418
     
     public partial class Entities : DbContext
     {
+        private static Entities _context;
         public Entities()
             : base("name=Entities")
         {
@@ -24,7 +25,14 @@ namespace KhasyanovRijakov418
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
+        public static Entities GetContext()
+        {
+            if (_context == null)
+                _context = new Entities();
+            return _context;
+        }
+
         public virtual DbSet<Customers> Customers { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Storages> Storages { get; set; }

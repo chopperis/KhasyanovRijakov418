@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="CustomerID" />
           </Key>
-          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="nchar" MaxLength="30" Nullable="false" />
           <Property Name="LastName" Type="nchar" MaxLength="30" Nullable="false" />
           <Property Name="Address" Type="nchar" MaxLength="50" Nullable="false" />
@@ -31,7 +31,7 @@
           <Key>
             <PropertyRef Name="ProductID" />
           </Key>
-          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductName" Type="nchar" MaxLength="60" Nullable="false" />
           <Property Name="UnitDimension" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Price" Type="int" Nullable="false" />
@@ -50,7 +50,7 @@
           <Key>
             <PropertyRef Name="StorageID" />
           </Key>
-          <Property Name="StorageID" Type="int" Nullable="false" />
+          <Property Name="StorageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NameStorage" Type="nchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
@@ -67,7 +67,7 @@
           <Key>
             <PropertyRef Name="Waybill_ID" />
           </Key>
-          <Property Name="Waybill_ID" Type="int" Nullable="false" />
+          <Property Name="Waybill_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Date_Waybill" Type="date" Nullable="false" />
           <Property Name="Price_Waybill" Type="float" Nullable="false" />
           <Property Name="CustomerID" Type="int" />

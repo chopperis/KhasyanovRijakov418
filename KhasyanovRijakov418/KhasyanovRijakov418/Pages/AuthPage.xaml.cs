@@ -46,11 +46,11 @@ namespace KhasyanovRijakov418.Pages
                 MessageBox.Show("Пользователь успешно найден!");
 
                 switch (user.Role) {
-                    case "Заказчик":
+                    case "Customer":
                         NavigationService?.Navigate(new Menu());
                         break;
-                    case "Директор":
-                        NavigationService?.Navigate(new Menu());
+                    case "Director":
+                        NavigationService?.Navigate(new DirectorMenu());
                         break;
                 }
             }

@@ -16,28 +16,29 @@ using System.Windows.Shapes;
 namespace KhasyanovRijakov418.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для CustomerMenu.xaml
+    /// Логика взаимодействия для Products.xaml
     /// </summary>
-    public partial class CustomerMenu : Page
+    public partial class Products : Page
     {
-        public CustomerMenu()
+        public Products()
         {
             InitializeComponent();
+            DataGridCar.ItemsSource = Entities.GetContext().Product.ToList();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new Page2());
+
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void ButtonDel_OnClick(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new AuthPage());
+
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void ButtonEdit_OnClick(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new Menu());
+
         }
     }
 }
