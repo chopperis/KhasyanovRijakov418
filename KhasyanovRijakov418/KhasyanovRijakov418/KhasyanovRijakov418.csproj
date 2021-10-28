@@ -81,6 +81,12 @@
     <Compile Include="Pages\AddEditPage.xaml.cs">
       <DependentUpon>AddEditPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AddEditPage2.xaml.cs">
+      <DependentUpon>AddEditPage2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddEditPage3.xaml.cs">
+      <DependentUpon>AddEditPage3.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AuthPage.xaml.cs">
       <DependentUpon>AuthPage.xaml</DependentUpon>
     </Compile>
@@ -141,6 +147,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\AddEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AddEditPage2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AddEditPage3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

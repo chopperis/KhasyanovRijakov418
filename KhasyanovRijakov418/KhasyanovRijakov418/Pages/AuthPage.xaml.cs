@@ -27,7 +27,7 @@ namespace KhasyanovRijakov418.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(login.Text) || string.IsNullOrEmpty(password.Text)) {
+            if (string.IsNullOrEmpty(login.Text) || string.IsNullOrEmpty(password.Password)) {
                 MessageBox.Show("Введите логин и пароль!");
                 return;
             }
@@ -36,7 +36,7 @@ namespace KhasyanovRijakov418.Pages
             {
                 var user = db.Users
                     .AsNoTracking()
-                    .FirstOrDefault(u => u.Login == login.Text && u.Password == password.Text);
+                    .FirstOrDefault(u => u.Login == login.Text && u.Password == password.Password);
 
                 if (user == null) {
                     MessageBox.Show("Пользователь с такими данными не найден!");

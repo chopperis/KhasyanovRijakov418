@@ -1,4 +1,4 @@
-﻿<Page x:Class="KhasyanovRijakov418.Pages.AddEditPage"
+﻿<Page x:Class="KhasyanovRijakov418.Pages.AddEditPage3"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,11 +6,10 @@
       xmlns:local="clr-namespace:KhasyanovRijakov418.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AddEditPage">
+      Title="AddEditPage3">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -20,14 +19,12 @@
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="Имя" Grid.Row="0" Grid.Column="0" Margin="10,10,0,10"/>
-        <TextBlock Text="Фамилия" Grid.Row="1" Grid.Column="0" Margin="10,10,0,10"/>
-        <TextBlock Text="Адрес" Grid.Row="2" Grid.Column="0" Margin="10,10,0,10"/>
-        <TextBlock Text="Бансковские данные" Grid.Row="3" Grid.Column="0" Margin="10,10,0,10"/>
-        <TextBox Grid.Column="1" Margin="10"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Margin="10"/>
+        <TextBlock Text="Название продукта" Grid.Row="0" Grid.Column="0" Margin="10,10,0,10"/>
+        <TextBlock Text="Единица измерения" Grid.Row="1" Grid.Column="0" Margin="10,10,0,10"/>
+        <TextBlock Text="Цена" Grid.Row="2" Grid.Column="0" Margin="10,10,0,10"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Margin="10"/>
+        <ComboBox Name="CmbCat" DisplayMemberPath="Category" Grid.Row="1" Grid.Column="1" Margin="10"/>
         <TextBox Grid.Row="2" Grid.Column="1" Margin="10"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Margin="10"/>
         <Button Name="ButtonSave" Content="Сохранить" Grid.Row="4" Grid.ColumnSpan="2" Click="ButtonSave_OnClick" Margin="10"/>
     </Grid>
 </Page>

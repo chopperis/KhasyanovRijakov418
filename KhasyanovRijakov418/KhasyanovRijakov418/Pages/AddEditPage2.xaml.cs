@@ -16,27 +16,16 @@ using System.Windows.Shapes;
 namespace KhasyanovRijakov418.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для Waybills.xaml
+    /// Логика взаимодействия для AddEditPage2.xaml
     /// </summary>
-    public partial class Waybills : Page
+    public partial class AddEditPage2 : Page
     {
-        public Waybills()
+        public AddEditPage2()
         {
             InitializeComponent();
-            DataGridCar.ItemsSource = Entities.GetContext().Waybill.ToList();
         }
 
-        private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
-        {
-            NavigationService?.Navigate(new AddEditPage2());
-        }
-
-        private void ButtonEdit_OnClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ButtonDel_OnClick(object sender, RoutedEventArgs e)
+        private void ButtonSave_OnClick(object sender, RoutedEventArgs e)
         {
 
         }

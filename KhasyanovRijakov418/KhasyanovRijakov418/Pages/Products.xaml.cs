@@ -28,7 +28,7 @@ namespace KhasyanovRijakov418.Pages
 
         private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {
-
+            NavigationService?.Navigate(new AddEditPage3());
         }
 
         private void ButtonDel_OnClick(object sender, RoutedEventArgs e)
